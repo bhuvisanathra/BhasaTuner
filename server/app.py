@@ -1,12 +1,15 @@
-from flask import request,jsonify
+from flask import request, jsonify
 from flask import Flask
 from flask_cors import CORS, cross_origin
 import os
 import requests
-import speech_recognition as sr
 
 app = Flask(__name__)
-CORS(app, resources={r"/upload_sans": {"origins": "http://localhost:5173"},r"/process_english": {"origins": "http://localhost:5173"},r"/process_hindi": {"origins": "http://localhost:5173"},r"/process_gujarati": {"origins": "http://localhost:5173"},r"/process_english": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/upload_sans": {"origins": "http://localhost:5173"},
+                     r"/process_english": {"origins": "http://localhost:5173"},
+                     r"/process_hindi": {"origins": "http://localhost:5173"},
+                     r"/process_gujarati": {"origins": "http://localhost:5173"},
+                     r"/process_english": {"origins": "http://localhost:5173"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Initialize a counter
@@ -23,19 +26,17 @@ def upload_audio():
         filename = f"recorded_audio_{upload_counter}.wav"
         folder_path = os.path.join(app.root_path, "sanskrit_recordings")
         os.makedirs(folder_path, exist_ok=True)  
-        audio_file.save(os.path.join(folder_path, filename))
+        audio_path = os.path.join(folder_path, filename)
+        audio_file.save(audio_path)
         upload_counter += 1  
-        with open(os.path.join(folder_path, filename), "rb") as f:
+        with open(audio_path, "rb") as f:
             data = f.read()
         response = requests.post(API_URL, headers=headers, data=data)
-        # print(response.json()["text"])
-        os.remove(audio_file_path)
+        os.remove(audio_path)  # Remove the audio file
         return response.json()
     
     else:
         return 'No audio file received!', 400
-    
-
 
 # Hindi Model
 API_URL_hindi = "https://api-inference.huggingface.co/models/vasista22/whisper-hindi-small"
@@ -50,11 +51,12 @@ def process_hindi():
             filename = f"recorded_audio_hindi.wav"  
             folder_path = os.path.join(app.root_path, "hindi_recordings")
             os.makedirs(folder_path, exist_ok=True)  
-            audio_file.save(os.path.join(folder_path, filename))
-            with open(os.path.join(folder_path, filename), "rb") as f:
+            audio_path = os.path.join(folder_path, filename)
+            audio_file.save(audio_path)
+            with open(audio_path, "rb") as f:
                 data = f.read()
             response = requests.post(API_URL_hindi, headers=headers_hindi, data=data)
-            os.remove(audio_file_path)
+            os.remove(audio_path)  # Remove the audio file
             return response.json()
         else:
             return 'No audio file received!', 400
@@ -74,11 +76,12 @@ def process_gujarati():
             filename = f"recorded_audio_gujarati.wav"  
             folder_path = os.path.join(app.root_path, "gujarati_recordings")
             os.makedirs(folder_path, exist_ok=True)  
-            audio_file.save(os.path.join(folder_path, filename))
-            with open(os.path.join(folder_path, filename), "rb") as f:
+            audio_path = os.path.join(folder_path, filename)
+            audio_file.save(audio_path)
+            with open(audio_path, "rb") as f:
                 data = f.read()
             response = requests.post(API_URL_gujarati, headers=headers_gujarati, data=data)
-            os.remove(audio_file_path)
+            os.remove(audio_path)  # Remove the audio file
             return response.json()
         else:
             return 'No audio file received!', 400
@@ -99,13 +102,17 @@ def process_english():
             filename = f"recorded_audio_english.wav"  
             folder_path = os.path.join(app.root_path, "english_recordings")
             os.makedirs(folder_path, exist_ok=True)  
-            audio_file.save(os.path.join(folder_path, filename))
-            with open(os.path.join(folder_path, filename), "rb") as f:
+            audio_path = os.path.join(folder_path, filename)
+            audio_file.save(audio_path)
+            with open(audio_path, "rb") as f:
                 data = f.read()
             response = requests.post(API_URL_english, headers=headers_english, data=data)
-            os.remove(audio_file_path)
+            os.remove(audio_path)  # Remove the audio file
             return response.json()
         else:
             return 'No audio file received!', 400
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
