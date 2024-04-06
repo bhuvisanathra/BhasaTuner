@@ -271,6 +271,7 @@ const AudioRecorder = () => {
         )}
         {uploading && <Loader />}
       </div>
+      <Footer/>
     </>
   );
 };
