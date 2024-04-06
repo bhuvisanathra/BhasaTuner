@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import Footer from "../components/Footer";
 
 const ProfilePage = () => {
   const sections = [
@@ -28,8 +29,8 @@ const ProfilePage = () => {
           </h2>
           <p className="text-gray-600 text-center mb-6">jane.doe@example.com</p>
           <p className="text-gray-700 mb-6">
-            As a passionate learner and experienced professional, I'm dedicated to
-            continuously expanding my knowledge and skills. With a strong
+            As a passionate learner and experienced professional, I'm dedicated
+            to continuously expanding my knowledge and skills. With a strong
             background in [your field], I thrive on tackling complex challenges
             and finding innovative solutions. In my free time, you can find me
             exploring new hobbies, reading thought-provoking books, or
@@ -64,7 +65,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

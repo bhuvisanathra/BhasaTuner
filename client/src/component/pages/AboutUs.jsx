@@ -89,9 +89,12 @@ const jsonData = [
 
 const App = () => {
   return (
-    <div>
-      <TeamSection teamData={jsonData} />
-    </div>
+    <>
+      <div>
+        <TeamSection teamData={jsonData} />
+      </div>
+      <Footer />
+    </>
   );
 };
 

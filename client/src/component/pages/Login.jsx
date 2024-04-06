@@ -108,6 +108,7 @@ function RegisterAndLogin() {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
