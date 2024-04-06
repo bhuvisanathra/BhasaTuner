@@ -170,7 +170,6 @@ const AudioRecorder = () => {
   };
 
   return (
-    <>
     <div>
       <h1 style={{ marginBottom: "2rem" }}>Hindi Sikhe</h1>
       <ToastContainer />
@@ -250,8 +249,6 @@ const AudioRecorder = () => {
       )}
       {uploading && <Loader />}
     </div>
-    <Footer/>
-    </>
   );
 };
 

@@ -41,7 +41,6 @@ const TeamSection = ({ teamData }) => {
           ))}
         </div>
       </section>
-      <Footer/>
     </>
   );
 };
