@@ -23,6 +23,8 @@ const AudioRecorder = () => {
   const [currentCardId, setCurrentCardId] = useState(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const mediaStreamRef = useRef(null);
+  const [totalPoints, setTotalPoints] = useState(100);
+  const [earnedPoints, setEarnedPoints] = useState(0);
 
   let categoryData;
   switch (category) {
@@ -174,7 +176,7 @@ const AudioRecorder = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center min-h-screen py-8">
+      <div className="container mx-auto px-4 flex flex-col items-center min-h-screen py-8">
         <h1 className="text-4xl font-bold mb-4 text-purple-700 md:text-5xl">
           Sanskrit उपशक्
         </h1>
@@ -258,16 +260,21 @@ const AudioRecorder = () => {
         {audioURL && (
           <audio controls src={audioURL} className="mb-4 sm:w-1/2"></audio>
         )}
-        <h2 className="text-lg font-semibold sm:text-xl">{response}</h2>
 
-        {showConfirmationDialog && (
-          <Confirmation
-            handleConfirmation={handleConfirmation}
-            setShowConfirmationDialog={setShowConfirmationDialog}
-          />
-        )}
-        {uploading && <Loader />}
+<div className="container mx-auto px-4">
+        <div className="points_container text-center mb-8">
+          <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4"> {/* Added margin to the right */}
+            <h2 className="text-lg font-semibold mb-2">Total Points</h2>
+            <p className="text-2xl">{totalPoints}</p>
+          </div>
+          <div className="bg-green-500 text-white rounded-md py-4 px-6 inline-block">
+            <h2 className="text-lg font-semibold mb-2">Earned Points</h2>
+            <p className="text-2xl">{earnedPoints}</p>
+          </div>
+        </div>
       </div>
+      </div>
+      
       <Footer />
     </>
   );

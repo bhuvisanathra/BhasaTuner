@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+
+
 const AudioRecorder = () => {
   const [category, setCategory] = useState("barakhdi");
   const [recording, setRecording] = useState(false);
@@ -23,6 +25,8 @@ const AudioRecorder = () => {
   const [currentCardId, setCurrentCardId] = useState(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const mediaStreamRef = useRef(null);
+  const [totalPoints, setTotalPoints] = useState(100);
+  const [earnedPoints, setEarnedPoints] = useState(0);
 
   let categoryData;
   switch (category) {
@@ -271,6 +275,18 @@ const AudioRecorder = () => {
           />
         )}
         {uploading && <Loader />}
+        <div className="container mx-auto px-4">
+        <div className="points_container text-center mb-8">
+          <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4"> {/* Added margin to the right */}
+            <h2 className="text-lg font-semibold mb-2">Total Points</h2>
+            <p className="text-2xl">{totalPoints}</p>
+          </div>
+          <div className="bg-green-500 text-white rounded-md py-4 px-6 inline-block">
+            <h2 className="text-lg font-semibold mb-2">Earned Points</h2>
+            <p className="text-2xl">{earnedPoints}</p>
+          </div>
+        </div>
+      </div>
       </div>
       <Footer />
     </>

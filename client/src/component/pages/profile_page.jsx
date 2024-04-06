@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navbar from "../components/Navbar";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -6,7 +6,9 @@ import "react-circular-progressbar/dist/styles.css";
 import Footer from "../components/Footer";
 
 const ProfilePage = () => {
-  const navigate = useNavigate(); // Get the navigation function
+  const navigate = useNavigate();
+  const [totalPoints, setTotalPoints] = useState(100);
+  const [earnedPoints, setEarnedPoints] = useState(50); // Get the navigation function
 
   const sections = [
     { title: "Sanskrit", value: 85 },
@@ -31,6 +33,14 @@ const ProfilePage = () => {
             Jane Doe
           </h2>
           <p className="text-gray-600 text-center mb-6">jane.doe@example.com</p>
+          <div className="container mx-auto px-4">
+        <div className="points_container text-center mb-8">
+          <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4"> {/* Added margin to the right */}
+            <h2 className="text-lg font-semibold mb-2">Total Earned Points</h2>
+            <p className="text-2xl">{totalPoints}</p>
+          </div>
+        </div>
+      </div>
           <p className="text-gray-700 mb-6">
             As a passionate learner and experienced professional, I'm dedicated to
             continuously expanding my knowledge and skills. With a strong
@@ -45,7 +55,7 @@ const ProfilePage = () => {
                 key={index}
                 className="flex flex-col items-center justify-center w-full md:w-auto mb-8 md:mb-0"
               >
-                <div className="w-20 h-20">
+                <div className="w-20 h-20 ">
                   <CircularProgressbar
                     value={section.value}
                     text={`${section.value}%`}
