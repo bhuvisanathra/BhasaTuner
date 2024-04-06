@@ -51,6 +51,13 @@ function Navbar() {
               </a>
               <a
                 href="#"
+                onClick={() => navigate("/profile")}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Profile Page
+              </a>
+              <a
+                href="#"
                 onClick={handleSignOut}
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >
