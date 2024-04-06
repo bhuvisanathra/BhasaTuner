@@ -3,10 +3,11 @@ import { BASE_URL } from "../../../url";
 import { Loader } from "../Loader";
 import Confirmation from "../Confirmation";
 import { barakhdi } from "../../data/barakhadi_eng";
-import { words } from "../../data/words_sans";
-import { shlok } from "../../data/shlok_sans";
+import { words } from "../../data/words_hindi";
+import { shlok } from "../../data/shlok_eng";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "../components/Navbar";
 
 const AudioRecorder = () => {
   const [category, setCategory] = useState("barakhdi");
@@ -38,7 +39,7 @@ const AudioRecorder = () => {
   }
 
   useEffect(() => {
-    // Simulating the Sanskrit model loading
+    // Simulating the hindi model loading
     const modelLoadingTimeout = setTimeout(() => {
       setModelLoaded(true);
     }, 20000);
@@ -124,13 +125,13 @@ const AudioRecorder = () => {
 
       setResponse(stringToCheck);
       console.log("Outside ", stringToCheck);
-      console.log("Outside ", categoryData[currentCardIndex].sanskrit);
+      console.log("Outside ", categoryData[currentCardIndex].hindi);
       console.log(
         "Outside ",
-        stringToCheck == categoryData[currentCardIndex].sanskrit
+        stringToCheck == categoryData[currentCardIndex].hindi
       );
 
-      if (stringToCheck == categoryData[currentCardIndex].english) {
+      if (stringToCheck == categoryData[currentCardIndex].hindi) {
         console.log("Inside ", stringToCheck);
         console.log(stringToCheck);
         toast.success("Great Job!");
@@ -169,86 +170,108 @@ const AudioRecorder = () => {
     setCurrentCardId(null);
   };
 
+  const handleConfirmation = () => {
+    resetState();
+  };
+
   return (
-    <div>
-      <h1 style={{ marginBottom: "2rem" }}>Hindi Sikhe</h1>
-      <ToastContainer />
-      <div>
-        <label htmlFor="category">Choose a category:</label>
-        <select id="category" value={category} onChange={handleCategoryChange}>
-          <option value="barakhdi">Basic</option>
-          <option value="words">Intermediate</option>
-          <option value="shlok">Advance</option>
-        </select>
-      </div>
-      <div className="card">
-        <div>
-          <h1>{categoryData[currentCardIndex].english}</h1>
+    <>
+      <Navbar />
+      <div className="flex flex-col items-center min-h-screen py-8">
+        <h1 className="text-4xl font-bold mb-4 text-purple-700 md:text-5xl">
+          hindi उपशक्
+        </h1>
+        <ToastContainer />
+        <div className="mb-4">
+          <label htmlFor="category" className="mr-2 font-semibold">
+            Choose a category:
+          </label>
+          <select
+            id="category"
+            value={category}
+            onChange={handleCategoryChange}
+            className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 sm:text-lg"
+          >
+            <option value="barakhdi">Basic</option>
+            <option value="words">Intermediate</option>
+            <option value="shlok">Advance</option>
+          </select>
         </div>
-        <div className="list_sub_data">
-          <div className="pronunciation">
-            <span>Pronunciation:</span>{" "}
-            {categoryData[currentCardIndex].pronunciation}
+        <div className="card bg-white rounded-lg shadow-md p-6 md:p-8 mb-6 max-w-3xl w-full md:w-2/3 lg:w-1/2">
+          <div className="text-4xl md:text-6xl font-bold mb-6 md:mb-8 text-center">
+            {categoryData[currentCardIndex].hindi}
           </div>
-          {categoryData[currentCardIndex].meaning ? (
-            <div className="meaning">
-              <span>Meaning:</span> {categoryData[currentCardIndex].meaning}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+            <div className="pronunciation text-base md:text-lg mb-2 md:mb-0">
+              <span className="font-semibold">Pronunciation:</span>{" "}
+              {categoryData[currentCardIndex].pronunciation}
             </div>
-          ) : (
-            " "
-          )}
+            {categoryData[currentCardIndex].meaning ? (
+              <div className="meaning text-base md:text-lg">
+                <span className="font-semibold">Meaning:</span>{" "}
+                {categoryData[currentCardIndex].meaning}
+              </div>
+            ) : (
+              " "
+            )}
+          </div>
         </div>
-      </div>
-      <div className="button_container">
-        <button
-          onClick={startRecording}
-          disabled={recording || uploaded}
-          className="mb-1 xl:mr-2"
-        >
-          Start Recording
-        </button>
-        <button
-          onClick={stopRecording}
-          disabled={!recording || uploaded}
-          className="mb-1 xl:mr-2"
-        >
-          Stop Recording
-        </button>
-        <button
-          onClick={uploadBlob}
-          disabled={audioChunks.length === 0 || uploaded || recording}
-          className="mb-1 xl:mr-2"
-        >
-          Upload Audio
-        </button>
-        <button
-          onClick={handlePlay}
-          disabled={!uploaded || recording}
-          className="mb-1 xl:mr-2"
-        >
-          Play Recorded Audio
-        </button>
+        <div className="button_container flex flex-wrap justify-center mb-4">
+          <button
+            onClick={startRecording}
+            disabled={recording || uploaded}
+            className="bg-purple-500 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto sm:mr-2 disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
+          >
+            Start Recording
+          </button>
+          <button
+            onClick={stopRecording}
+            disabled={!recording || uploaded}
+            className="bg-purple-500 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto sm:mr-2 disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
+          >
+            Stop Recording
+          </button>
+          <button
+            onClick={uploadBlob}
+            disabled={audioChunks.length === 0 || uploaded || recording}
+            className="bg-purple-500 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto sm:mr-2 disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
+          >
+            Upload Audio
+          </button>
+          <button
+            onClick={handlePlay}
+            disabled={!uploaded || recording}
+            className="bg-purple-500 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto sm:mr-2 disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
+          >
+            Play Recorded Audio
+          </button>
+          <button
+            onClick={() => setShowConfirmationDialog(true)}
+            disabled={!uploaded || recording}
+            className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
+          >
+            Reset
+          </button>
+        </div>
+        {uploaded && (
+          <p className="text-green-500 sm:text-lg">
+            Audio uploaded successfully!
+          </p>
+        )}
+        {audioURL && (
+          <audio controls src={audioURL} className="mb-4 sm:w-1/2"></audio>
+        )}
+        <h2 className="text-lg font-semibold sm:text-xl">{response}</h2>
 
-        <button
-          onClick={resetState}
-          disabled={!uploaded || recording}
-          className="mb-1"
-        >
-          Reset
-        </button>
+        {showConfirmationDialog && (
+          <Confirmation
+            handleConfirmation={handleConfirmation}
+            setShowConfirmationDialog={setShowConfirmationDialog}
+          />
+        )}
+        {uploading && <Loader />}
       </div>
-      {uploaded && <p>Audio uploaded successfully!</p>}
-      {audioURL && <audio controls src={audioURL}></audio>}
-      <h2 style={{ textWrap: "wrap" }}>{response}</h2>
-
-      {showConfirmationDialog && (
-        <Confirmation
-          handleConfirmation={handleConfirmation}
-          setShowConfirmationDialog={setShowConfirmationDialog}
-        />
-      )}
-      {uploading && <Loader />}
-    </div>
+    </>
   );
 };
 
