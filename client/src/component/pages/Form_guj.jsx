@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { BASE_URL } from "../../../url";
 import { Loader } from "../Loader";
 import Confirmation from "../Confirmation";
-import { barakhdi } from "../../data/barakhadi_eng";
+import { barakhdi } from "../../data/barakhadi_guj";
 import { words } from "../../data/words_sans";
 import { shlok } from "../../data/shlok_sans";
 import { ToastContainer, toast } from "react-toastify";
@@ -127,10 +127,10 @@ const AudioRecorder = () => {
       console.log("Outside ", categoryData[currentCardIndex].sanskrit);
       console.log(
         "Outside ",
-        stringToCheck == categoryData[currentCardIndex].sanskrit
+        stringToCheck == categoryData[currentCardIndex].gujarati
       );
 
-      if (stringToCheck == categoryData[currentCardIndex].english) {
+      if (stringToCheck == categoryData[currentCardIndex].gujarati) {
         console.log("Inside ", stringToCheck);
         console.log(stringToCheck);
         toast.success("Great Job!");
@@ -183,7 +183,7 @@ const AudioRecorder = () => {
       </div>
       <div className="card">
         <div>
-          <h1>{categoryData[currentCardIndex].english}</h1>
+          <h1>{categoryData[currentCardIndex].gujarati}</h1>
         </div>
         <div className="list_sub_data">
           <div className="pronunciation">
