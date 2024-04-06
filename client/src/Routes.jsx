@@ -12,7 +12,7 @@ import Form_guj from "./component/pages/Form_guj";
 import Form_hindi from "./component/pages/Form_hindi";
 import Homepage from "./component/pages/Homepage";
 import AboutUs from "./component/pages/AboutUs";
-import contactUs from "./component/pages/contactUs";
+import ContactUs from "./component/pages/contactUs.jsx";
 
 const AppRoutes = () => {
   return (
@@ -26,7 +26,7 @@ const AppRoutes = () => {
           <Route path="/gujarati" exact element={<Form_guj />} />
           <Route path="/hindi" exact element={<Form_hindi />} />
           <Route path="/about-us" exact element={<AboutUs />} />
-          <Route path="/contact-us" exact element={<contactUs />} />
+          <Route path="/contact-us" exact element={<ContactUs />} />
         </Routes>
       </Router>
     </>
