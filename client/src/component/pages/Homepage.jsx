@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import heroimage from "../assets/hero.png";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   let navigate = useNavigate();
@@ -78,6 +79,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

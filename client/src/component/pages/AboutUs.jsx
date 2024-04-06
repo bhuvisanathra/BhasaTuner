@@ -4,6 +4,7 @@ import bhuvi from "../assets/github.jpg";
 import dev from "../assets/github1.jpg";
 import harsh from "../assets/github2.jpg";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer.jsx";
 
 const TeamMemberCard = ({ name, position, imgSrc, social }) => {
   return (
