@@ -108,7 +108,7 @@ const AudioRecorder = () => {
     formData.append("type", "wav");
 
     try {
-      const apiUrl = `${BASE_URL}/upload`;
+      const apiUrl = `${BASE_URL}/process_gujarati`;
       const response = await fetch(apiUrl, {
         method: "POST",
         mode: "cors",
@@ -272,7 +272,7 @@ const AudioRecorder = () => {
         )}
         {uploading && <Loader />}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
