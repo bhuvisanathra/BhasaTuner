@@ -8,7 +8,50 @@ const Homepage = () => {
  return (
     <>
       <Navbar />
-      <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-bg-gray-200 to-bg-gray-500">
+
+      <div className="bg-white">
+      
+
+      <section className="bg-[#FCF8F1] bg-opacity-30 py-10 sm:py-16 lg:py-24">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
+            <div>
+              <p className="text-base font-semibold tracking-wider text-blue-600 uppercase">
+                A Language Learning website.......!
+              </p>
+              <h1 className="mt-4 text-4xl font-bold text-black lg:mt-8 sm:text-6xl xl:text-8xl">
+                Connect & learn from our Bots.
+              </h1>
+              <p className="mt-4 text-base text-black lg:mt-8 sm:text-xl">
+                Grow your vocabular skills.
+              </p>
+
+              
+
+              <p className="mt-5 text-gray-600">
+                Already joined us?{" "}
+                <a
+                  href="#"
+                  title=""
+                  className="text-black transition-all duration-200 hover:underline"
+                >
+                  Log in
+                </a>
+              </p>
+            </div>
+
+            <div>
+              <img
+                className="w-full"
+                src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-white from-bg-gray-200 to-bg-gray-500">
         <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <button
