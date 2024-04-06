@@ -29,18 +29,16 @@ const Confirmation = ({ handleConfirmation, setShowConfirmationDialog }) => {
         <p className="text-gray-700 mb-6">
           Are you sure you want to reset the recorded audio?
         </p>
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <button
-            type="button"
             onClick={handleConfirmation}
-            className="px-4 py-2 mr-2 text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-4 transition-colors duration-300"
           >
             Yes
           </button>
           <button
-            type="button"
             onClick={() => setShowConfirmationDialog(false)}
-            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+            className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-md transition-colors duration-300"
           >
             No
           </button>
