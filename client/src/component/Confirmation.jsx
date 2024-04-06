@@ -27,7 +27,7 @@ const Confirmation = ({ handleConfirmation, setShowConfirmationDialog }) => {
           </button>
         </div>
         <p className="text-gray-700 mb-6">
-          Are you sure you want to upload the recorded audio?
+          Are you sure you want to reset the recorded audio?
         </p>
         <div className="flex justify-end">
           <button
