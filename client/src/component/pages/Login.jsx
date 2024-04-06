@@ -8,6 +8,7 @@ import "../css/Login.css";
 import { useNavigate } from "react-router";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../components/Footer";
 
 function RegisterAndLogin() {
   const [login, setLogin] = useState(true);

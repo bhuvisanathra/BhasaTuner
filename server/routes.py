@@ -20,9 +20,12 @@ def upload_audio():
     audio_file = request.files['audio_data']
     if audio_file:
         filename = f"recorded_audio_{upload_counter}.wav"
-        audio_file.save(os.path.join(app.root_path, filename))
+        # Specify the folder path where you want to save the audio files
+        folder_path = os.path.join(app.root_path, "recordings")
+        os.makedirs(folder_path, exist_ok=True)  # Create the folder if it doesn't exist
+        audio_file.save(os.path.join(folder_path, filename))
         upload_counter += 1  # Increment the counter for the next upload
-        with open(filename, "rb") as f:
+        with open(os.path.join(folder_path, filename), "rb") as f:
             data = f.read()
         response = requests.post(API_URL, headers=headers, data=data)
         # print(response.json()["text"])

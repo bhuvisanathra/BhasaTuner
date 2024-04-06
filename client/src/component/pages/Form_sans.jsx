@@ -8,6 +8,7 @@ import { shlok } from "../../data/shlok_sans";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const AudioRecorder = () => {
   const [category, setCategory] = useState("barakhdi");
@@ -107,7 +108,7 @@ const AudioRecorder = () => {
     formData.append("type", "wav");
 
     try {
-      const apiUrl = `${BASE_URL}/upload`;
+      const apiUrl = `${BASE_URL}/upload_sans`;
       const response = await fetch(apiUrl, {
         method: "POST",
         mode: "cors",
@@ -271,7 +272,7 @@ const AudioRecorder = () => {
         )}
         {uploading && <Loader />}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -38,7 +38,6 @@ six==1.16.0
 sqlparse==0.4.4
 sympy==1.12
 tokenizers==0.15.2
-torch==2.2.1
 tqdm==4.66.2
 transformers==4.39.1
 typing_extensions==4.10.0
@@ -46,4 +45,3 @@ tzdata==2024.1
 urllib3==2.1.0
 watchdog==4.0.0
 Werkzeug==3.0.1
-youtube-transcript-api==0.6.2
