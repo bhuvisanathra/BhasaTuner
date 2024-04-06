@@ -7,12 +7,12 @@ const Footer = () => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-16 gap-x-12">
                     <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
                         <div className="flex-shrink-0">
-                            <a href="http://localhost:3000/" title="" className="footer-heading">
-                                Jewel Cart
+                            <a href="/homepage" title="" className="footer-heading">
+                                Language Learner
                             </a>
                         </div>
 
-                        <p className="text-base leading-relaxed text-gray-600 mt-7">One of the best design makers at the lowest labor charges available</p>
+                        <p className="text-base leading-relaxed text-gray-600 mt-7">Learn any language easily</p>
                     </div>
 
                     <div className="company">
@@ -46,7 +46,7 @@ const Footer = () => {
                             </li>
 
                             <li>
-                                <a href="#" title="" className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Delivery Details </a>
+                                <a href="#" title="" className="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Languages </a>
                             </li>
 
                             <li>
@@ -75,7 +75,7 @@ const Footer = () => {
 
                 <hr className="mt-16 mb-10 border-gray-200" />
 
-                <p className="text-sm text-center text-gray-600">© Copyright 2024, All Rights Reserved by Harsh Langaliya</p>
+                <p className="text-sm text-center text-gray-600">© Copyright 2024, All Rights Reserved by Team Status-Code</p>
             </div>
         </section>
     )

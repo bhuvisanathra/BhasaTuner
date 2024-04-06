@@ -14,6 +14,7 @@ import Homepage from "./component/pages/Homepage";
 import AboutUs from "./component/pages/AboutUs";
 import ContactUs from "./component/pages/contactUs.jsx";
 import ProfilePage from "./component/pages/profile_page.jsx";
+import ProfileEditPage from "./component/pages/profile_edit_page.jsx";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
           <Route path="/about-us" exact element={<AboutUs />} />
           <Route path="/contact-us" exact element={<ContactUs />} />
           <Route path="/profile" exact element={<ProfilePage />} />
+          <Route path="/editprofile" exact element={<ProfileEditPage />} />
         </Routes>
       </Router>
     </>

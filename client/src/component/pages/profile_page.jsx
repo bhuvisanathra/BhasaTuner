@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navbar from "../components/Navbar";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Footer from "../components/Footer";
 
 const ProfilePage = () => {
+  const navigate = useNavigate(); // Get the navigation function
+
   const sections = [
     { title: "Sanskrit", value: 85 },
     { title: "Hindi", value: 75 },
@@ -29,8 +32,8 @@ const ProfilePage = () => {
           </h2>
           <p className="text-gray-600 text-center mb-6">jane.doe@example.com</p>
           <p className="text-gray-700 mb-6">
-            As a passionate learner and experienced professional, I'm dedicated
-            to continuously expanding my knowledge and skills. With a strong
+            As a passionate learner and experienced professional, I'm dedicated to
+            continuously expanding my knowledge and skills. With a strong
             background in [your field], I thrive on tackling complex challenges
             and finding innovative solutions. In my free time, you can find me
             exploring new hobbies, reading thought-provoking books, or
@@ -59,7 +62,10 @@ const ProfilePage = () => {
             ))}
           </div>
           <div className="flex items-center justify-center mt-8">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
+              onClick={() => navigate("/editprofile")} // Use the navigation function
+            >
               Edit Profile
             </button>
           </div>
