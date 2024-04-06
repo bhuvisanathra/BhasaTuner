@@ -2,11 +2,32 @@ import React from "react";
 
 const Confirmation = ({ handleConfirmation, setShowConfirmationDialog }) => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4 text-center">Confirmation</h2>
-        <p className="text-gray-700 mb-6 text-center">
-          Are you sure you want to upload the recorded audio?
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
+        <div className="flex items-start justify-between mb-4">
+          <h3 className="text-lg font-semibold">Confirmation</h3>
+          <button
+            type="button"
+            onClick={() => setShowConfirmationDialog(false)}
+            className="text-gray-400 hover:text-gray-500 focus:outline-none"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <p className="text-gray-700 mb-6">
+          Are you sure you want to reset the recorded audio?
         </p>
         <div className="flex justify-center">
           <button
