@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { BASE_URL } from "../../../url";
 import { Loader } from "../Loader";
 import Confirmation from "../Confirmation";
-import { barakhdi } from "../../data/barakhadi_eng";
+import { barakhdi } from "../../data/barakhadi_hindi";
 import { words } from "../../data/words_hindi";
-import { shlok } from "../../data/shlok_eng";
+import { shlok } from "../../data/shlok_hindi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
@@ -108,7 +108,7 @@ const AudioRecorder = () => {
     formData.append("type", "wav");
 
     try {
-      const apiUrl = `${BASE_URL}/upload`;
+      const apiUrl = `${BASE_URL}/process_hindi`;
       const response = await fetch(apiUrl, {
         method: "POST",
         mode: "cors",

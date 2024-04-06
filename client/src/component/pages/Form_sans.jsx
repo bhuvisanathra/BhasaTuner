@@ -118,11 +118,7 @@ const AudioRecorder = () => {
       const responseData = await response.json();
       console.log("Audio uploaded successfully:", responseData);
 
-      const stringToCheck = JSON.stringify(
-        responseData.text.replace(/<s>/g, "")
-      )
-        .replace(/\s/g, "")
-        .replace(/^"(.*)"$/, "$1");
+      const stringToCheck = JSON.stringify(responseData.text);
 
       setResponse(stringToCheck);
       console.log("Outside ", stringToCheck);
