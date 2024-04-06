@@ -109,6 +109,3 @@ def process_english():
             return 'No audio file received!', 400
     except Exception as e:
         return jsonify({'error': str(e)})
-
-if __name__ == '__main__':
-    app.run(debug=True)
