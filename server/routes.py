@@ -16,15 +16,14 @@ headers = {"Authorization": "Bearer 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"}
 @cross_origin()
 @app.route('/upload_sans', methods=['POST'])
 def upload_audio():
-    global upload_counter  # Use the global upload_counter variable
+    global upload_counter  
     audio_file = request.files['audio_data']
     if audio_file:
         filename = f"recorded_audio_{upload_counter}.wav"
-        # Specify the folder path where you want to save the audio files
         folder_path = os.path.join(app.root_path, "recordings")
-        os.makedirs(folder_path, exist_ok=True)  # Create the folder if it doesn't exist
+        os.makedirs(folder_path, exist_ok=True)  
         audio_file.save(os.path.join(folder_path, filename))
-        upload_counter += 1  # Increment the counter for the next upload
+        upload_counter += 1  
         with open(os.path.join(folder_path, filename), "rb") as f:
             data = f.read()
         response = requests.post(API_URL, headers=headers, data=data)
