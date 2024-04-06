@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { BASE_URL } from "../../url";
-import { Loader } from "./Loader";
-import Confirmation from "./Confirmation";
-import { barakhdi } from "../data/barakhadi";
-import { words } from "../data/words";
-import { shlok } from "../data/shlok";
+import { BASE_URL } from "../../../url";
+import { Loader } from "../Loader";
+import Confirmation from "../Confirmation";
+import { barakhdi } from "../../data/barakhadi_sans";
+import { words } from "../../data/words_sans";
+import { shlok } from "../../data/shlok_sans";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -171,6 +171,7 @@ const AudioRecorder = () => {
 
   return (
     <div>
+      <h1 style={{ marginBottom: "2rem" }}>Sanskrit उपशक्</h1>
       <ToastContainer />
       <div>
         <label htmlFor="category">Choose a category:</label>

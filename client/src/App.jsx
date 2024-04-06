@@ -1,14 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import Form from "./component/Form";
+import Routes from "./Routes";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1 style={{ marginBottom: "2rem" }}>Sanskrit उपशक्</h1>
-      <Form />
+      <Routes />
     </>
   );
 }

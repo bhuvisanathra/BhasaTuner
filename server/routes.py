@@ -5,7 +5,7 @@ import os
 import requests
 
 app = Flask(__name__)
-CORS(app, resources={r"/upload": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/upload_sans": {"origins": "http://localhost:5173"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Initialize a counter
@@ -14,7 +14,7 @@ API_URL = "https://api-inference.huggingface.co/models/Tarakki100/sanskrit"
 headers = {"Authorization": "Bearer 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"}
 
 @cross_origin()
-@app.route('/upload', methods=['POST'])
+@app.route('/upload_sans', methods=['POST'])
 def upload_audio():
     global upload_counter  # Use the global upload_counter variable
     audio_file = request.files['audio_data']
