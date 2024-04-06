@@ -22,7 +22,8 @@
     "react-toastify": "^10.0.5",
     "recorder-js": "^1.0.7",
     "routes": "^2.1.0",
-    "toast": "^0.5.4"
+    "toast": "^0.5.4",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

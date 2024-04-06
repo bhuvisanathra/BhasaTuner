@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { database } from "../../firebase/Firebase";
+import { auth, db } from "../../firebase/Firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
 
@@ -8,7 +8,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = () => {
-    signOut(database).then((val) => {
+    signOut(auth).then((val) => {
       localStorage.removeItem("authToken");
       navigate("/login");
     });
@@ -134,6 +134,13 @@ function Navbar() {
             className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
             Contact Us
+          </a>
+          <a
+            href="#"
+            onClick={() => navigate("/profile")}
+            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >
+            Profile
           </a>
           <a
             href="#"

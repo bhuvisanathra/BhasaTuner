@@ -1,15 +1,21 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB4XtviGTnYd1UoLYhjYDH87vI7HH-eWOM",
-  authDomain: "emailpasswordlogin-53cb7.firebaseapp.com",
-  projectId: "emailpasswordlogin-53cb7",
-  storageBucket: "emailpasswordlogin-53cb7.appspot.com",
-  messagingSenderId: "1017475908639",
-  appId: "1:1017475908639:web:81d698601820397d0cc12a",
-  measurementId: "G-T573SQNBSW",
+  apiKey: "AIzaSyBliKBzqOY_c3j-0Ue_d1tmHkMHIlK71yU",
+  authDomain: "uemhackathon.firebaseapp.com",
+  projectId: "uemhackathon",
+  storageBucket: "uemhackathon.appspot.com",
+  messagingSenderId: "650691025025",
+  appId: "1:650691025025:web:4a2db26019ecac36951580",
+  measurementId: "G-XDMFW5C4K6",
 };
 
-const app = initializeApp(firebaseConfig);
-export const database = getAuth(app);
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
+const storage = getStorage(firebaseApp);
+
+export { db, auth, storage };
