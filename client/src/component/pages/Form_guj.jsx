@@ -176,7 +176,14 @@ const AudioRecorder = () => {
 
       setResponse(stringToCheck);
       console.log("Outside ", stringToCheck);
-      console.log("Outside ", categoryData[currentCardIndex].gujarati);
+      console.log(
+        "Outside ",
+        categoryData[currentCardIndex].gujarati
+          .replace(/\s{2,}/g, " ")
+          .replace(/^"(.*)"$/, "$1")
+          .trim()
+          .toLowerCase()
+      );
       console.log(
         "Outside ",
         stringToCheck == categoryData[currentCardIndex].gujarati
