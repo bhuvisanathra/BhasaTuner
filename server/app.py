@@ -5,11 +5,11 @@ import os
 import requests
 
 app = Flask(__name__)
-CORS(app, resources={r"/upload_sans": {"origins": "http://localhost:5173"},
-                     r"/process_english": {"origins": "http://localhost:5173"},
-                     r"/process_hindi": {"origins": "http://localhost:5173"},
-                     r"/process_gujarati": {"origins": "http://localhost:5173"},
-                     r"/process_english": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/upload_sans": {"origins": "https://bhasasikhouem.netlify.app/"},
+                     r"/process_english": {"origins": "https://bhasasikhouem.netlify.app/"},
+                     r"/process_hindi": {"origins": "https://bhasasikhouem.netlify.app/"},
+                     r"/process_gujarati": {"origins": "https://bhasasikhouem.netlify.app/"},
+                     r"/process_english": {"origins": "https://bhasasikhouem.netlify.app/"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Initialize a counter
