@@ -246,7 +246,7 @@ const AudioRecorder = () => {
       <Navbar />
       <div className="flex flex-col items-center min-h-screen py-8">
         <h1 className="text-4xl font-bold mb-4 text-purple-700 md:text-5xl">
-          hindi सिखे
+          भाषा Tuner
         </h1>
         <ToastContainer />
         <div className="mb-4">
