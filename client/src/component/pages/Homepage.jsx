@@ -25,16 +25,20 @@ const Homepage = () => {
                 <p className="mt-4 text-base text-black lg:mt-8 sm:text-xl">
                   Status Code-404
                 </p>
-                <div className="mt-5 flex items-center">
-                  <p className="text-gray-600">Already joined us?</p>
-                  <button
-                    onClick={() => navigate("/login")}
-                    title=""
-                    className="ml-2 text-purple-600 font-semibold transition-all duration-200 hover:text-purple-800"
-                  >
-                    Log in
-                  </button>
-                </div>
+                {localStorage.getItem("userId") == null ? (
+                  <div className="mt-5 flex items-center">
+                    <p className="text-gray-600">Already joined us?</p>
+                    <button
+                      onClick={() => navigate("/login")}
+                      title=""
+                      className="ml-2 text-purple-600 font-semibold transition-all duration-200 hover:text-purple-800"
+                    >
+                      Log in
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
               <div>
                 <img className="w-full" src={heroimage} alt="" />

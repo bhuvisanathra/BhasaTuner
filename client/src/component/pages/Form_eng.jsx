@@ -191,7 +191,13 @@ const AudioRecorder = () => {
         stringToCheck == categoryData[currentCardIndex].english
       );
 
-      if (stringToCheck == categoryData[currentCardIndex].english) {
+      if (
+        stringToCheck ==
+        categoryData[currentCardIndex].english
+          .replace(/<s>/g, "")
+          .replace(/\s/g, "")
+          .replace(/^"(.*)"$/, "$1")
+      ) {
         console.log("Inside ", stringToCheck);
         console.log(stringToCheck);
         toast.success("Great Job!");
