@@ -1,5 +1,6 @@
 # BHASHA SIKHO 
-![image](https://github.com/bhuvisanathra/UEM_hackathon/assets/68009290/8adc0bc0-def4-4434-8b4d-a1f3e52e20fb)
+![image](https://github.com/bhuvisanathra/UEM_hackathon/assets/68009290/6036513a-ba8a-4ca4-97c8-e567e0a5a3e4)
+
 
 
 BHASHA SIKHO is a Language Learning App: Create a web application for language learning that utilizes interactive exercises, multimedia content, and gamification techniques to engage users. The app should support multiple languages and cater to different proficiency levels, with features for vocabulary building, pronunciation practice, and cultural immersion
