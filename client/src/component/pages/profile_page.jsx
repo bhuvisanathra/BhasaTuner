@@ -3,18 +3,49 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Navbar from "../components/Navbar";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import Footer from "../components/Footer";
+import { db } from "../../firebase/Firebase";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [totalPoints, setTotalPoints] = useState(100);
   const [earnedPoints, setEarnedPoints] = useState(50); // Get the navigation function
+  const [email, setEmail] = useState();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userId");
+    if (storedEmail) {
+      setEmail(storedEmail);
+      const q = query(
+        collection(db, "users"),
+        where("Email", "==", storedEmail)
+      );
+      getQuery(q);
+    }
+  }, []);
+
+  const getQuery = async (q) => {
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      setData(doc.data());
+    });
+  };
 
   const sections = [
-    { title: "Sanskrit", value: 85 },
-    { title: "Hindi", value: 75 },
-    { title: "Gujarati", value: 90 },
-    { title: "English", value: 80 },
+    {
+      title: "Sanskrit",
+      value: Math.round((data?.Sanskrit_point / 300) * 100),
+    },
+    { title: "Hindi", value: Math.round((data?.Hindi_point / 300) * 100) },
+    {
+      title: "Gujarati",
+      value: Math.round((data?.Gujarati_point / 300) * 100),
+    },
+    { title: "English", value: Math.round((data?.English_point / 300) * 100) },
   ];
 
   return (
@@ -25,30 +56,32 @@ const ProfilePage = () => {
           <div className="flex items-center justify-center mb-6">
             <img
               className="w-32 h-32 rounded-full object-cover"
-              src="https://randomuser.me/api/portraits/women/12.jpg"
+              src={data?.ProfilePicture}
               alt="Profile"
             />
           </div>
           <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-2">
-            Jane Doe
+            {data?.Name}
           </h2>
-          <p className="text-gray-600 text-center mb-6">jane.doe@example.com</p>
+          <p className="text-gray-600 text-center mb-6">{data?.Email}</p>
           <div className="container mx-auto px-4">
-        <div className="points_container text-center mb-8">
-          <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4"> {/* Added margin to the right */}
-            <h2 className="text-lg font-semibold mb-2">Total Earned Points</h2>
-            <p className="text-2xl">{totalPoints}</p>
+            <div className="points_container text-center mb-8">
+              <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4">
+                {" "}
+                {/* Added margin to the right */}
+                <h2 className="text-lg font-semibold mb-2">
+                  Total Earned Points
+                </h2>
+                <p className="text-2xl">
+                  {data?.Sanskrit_point +
+                    data?.Hindi_point +
+                    data?.Gujarati_point +
+                    data?.English_point}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-          <p className="text-gray-700 mb-6">
-            As a passionate learner and experienced professional, I'm dedicated to
-            continuously expanding my knowledge and skills. With a strong
-            background in [your field], I thrive on tackling complex challenges
-            and finding innovative solutions. In my free time, you can find me
-            exploring new hobbies, reading thought-provoking books, or
-            volunteering in my local community.
-          </p>
+          <p className="text-gray-700 mb-6">{data?.Description}</p>
           <div className="flex flex-col md:flex-row justify-between items-center mt-8">
             {sections.map((section, index) => (
               <div

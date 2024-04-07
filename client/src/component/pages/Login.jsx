@@ -50,6 +50,7 @@ function RegisterAndLogin() {
         Hindi_point: 0,
         English_point: 0,
         Gujarati_point: 0,
+        Total_Point_Earned: 0,
       });
       setLogin(true);
       toast.success("User added successfully");
@@ -73,7 +74,15 @@ function RegisterAndLogin() {
       }
     } else {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+        // Store user id in local storage
+        console.log(user);
+        localStorage.setItem("userId", user.email);
         navigate("/homepage");
       } catch (error) {
         toast.error(error.message);
@@ -97,6 +106,11 @@ function RegisterAndLogin() {
         transition={Bounce}
       />
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-purple-700">
+            Bhasa Sikhe
+          </h1>
+        </div>
         <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
           <div className="flex justify-center mb-6">
             <div
@@ -131,7 +145,7 @@ function RegisterAndLogin() {
             >
               {!login && (
                 <>
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center">
                     <img
                       className="w-32 h-32 rounded-full object-cover"
                       src={

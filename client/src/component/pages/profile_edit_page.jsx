@@ -1,15 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore"; // Importing `doc` and `updateDoc`
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Importing `ref`, `uploadBytes`, and `getDownloadURL`
+import { v4 } from "uuid"; // Importing `v4` from UUID
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../components/Footer";
+import { db, storage } from "../../firebase/Firebase"; // Importing `storage`
+import { data } from "autoprefixer";
 
 function ProfileEditPage() {
+  const [id, setId] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userId");
+    if (storedEmail) {
+      setEmail(storedEmail);
+      const q = query(
+        collection(db, "users"),
+        where("Email", "==", storedEmail)
+      );
+      getQuery(q);
+    }
+  }, []);
+
+  const getQuery = async (q) => {
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0]; // Assuming there's only one user with the specified email
+      const userData = doc.data();
+      // console.log(doc.id, " => ", userData);
+      setData(userData);
+      setId(doc.id);
+      setName(userData?.Name);
+      setEmail(userData?.Email);
+      setDescription(userData?.Description);
+      setPhoto(userData?.ProfilePicture);
+    } else {
+      // console.log("No matching documents.");
+    }
+  };
 
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]);
@@ -17,10 +60,36 @@ function ProfileEditPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Log the ID to see if it's correct
+    // console.log("ID:", id);
 
-    // Just showing a toast message without any data storage
-    toast.success("Profile updated successfully!");
-    navigate("/profile");
+    let updateData = {
+      Name: name,
+      Email: email,
+      Description: description,
+    };
+
+    // Check if a new photo is selected
+    if (photo) {
+      const imgRef = ref(storage, `files/${v4()}`);
+      await uploadBytes(imgRef, photo);
+      const downloadURL = await getDownloadURL(imgRef);
+      // console.log("New file available at", downloadURL);
+      updateData.ProfilePicture = downloadURL;
+    } else {
+      // Keep the existing profile picture if no new photo is selected
+      updateData.ProfilePicture = data.ProfilePicture;
+    }
+
+    console.log(updateData);
+    // Check if `id` is not null or undefined before updating
+    if (id) {
+      await updateDoc(doc(db, "users", id), updateData);
+      toast.success("Profile updated successfully!");
+      navigate("/profile");
+    } else {
+      console.error("Error: ID is null or undefined");
+    }
   };
 
   return (
@@ -55,13 +124,7 @@ function ProfileEditPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <input
-              name="email"
-              placeholder="Email"
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+
             <textarea
               name="description"
               placeholder="Description"

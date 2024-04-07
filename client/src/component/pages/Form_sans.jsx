@@ -9,8 +9,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { db, storage } from "../../firebase/Firebase";
 
 const AudioRecorder = () => {
+  const [id, setId] = useState(null);
+  const [email, setEmail] = useState(null);
   const [category, setCategory] = useState("barakhdi");
   const [recording, setRecording] = useState(false);
   const [audioChunks, setAudioChunks] = useState([]);
@@ -23,8 +34,45 @@ const AudioRecorder = () => {
   const [currentCardId, setCurrentCardId] = useState(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const mediaStreamRef = useRef(null);
-  const [totalPoints, setTotalPoints] = useState(100);
+  const [totalPoints, setTotalPoints] = useState(50); // Default total points for the basic category
   const [earnedPoints, setEarnedPoints] = useState(0);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userId");
+    if (storedEmail) {
+      setEmail(storedEmail);
+      const q = query(
+        collection(db, "users"),
+        where("Email", "==", storedEmail)
+      );
+      getQuery(q);
+    }
+  }, [category, earnedPoints]);
+
+  const getQuery = async (q) => {
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+      const userData = doc.data();
+      setId(doc.id);
+      setEarnedPoints(userData?.Sanskrit_point);
+      if (category === "barakhdi" && earnedPoints >= 50) {
+        setCategory("words");
+        setCurrentCardIndex(0);
+        setTotalPoints(150); // Change total points for the intermediate category
+      } else if (category === "words" && earnedPoints >= 150) {
+        setCategory("shlok");
+        setCurrentCardIndex(0);
+        setTotalPoints(300); // Change total points for the advance category
+      } else {
+        setTimeout(() => {
+          resetState();
+        }, 3000);
+      }
+    } else {
+      // console.log("No matching documents.");
+    }
+  };
 
   let categoryData;
   switch (category) {
@@ -95,6 +143,15 @@ const AudioRecorder = () => {
     });
   };
 
+  const updatedCount = async (newPoints) => {
+    let updateData = {
+      Sanskrit_point: newPoints,
+    };
+    if (id) {
+      await updateDoc(doc(db, "users", id), updateData);
+    }
+  };
+
   const uploadBlob = async () => {
     console.log(barakhdi[currentCardIndex].id);
     if (audioChunks.length === 0) {
@@ -120,7 +177,9 @@ const AudioRecorder = () => {
       const responseData = await response.json();
       console.log("Audio uploaded successfully:", responseData);
 
-      const stringToCheck = JSON.stringify(responseData.text);
+      const stringToCheck = JSON.stringify(responseData?.text)
+        .replace(/<s>|<\/s>|\s+/g, "")
+        .replace(/"/g, "");
 
       setResponse(stringToCheck);
       console.log("Outside ", stringToCheck);
@@ -134,10 +193,15 @@ const AudioRecorder = () => {
         console.log("Inside ", stringToCheck);
         console.log(stringToCheck);
         toast.success("Great Job!");
-        setTimeout(() => {
-          setCurrentCardIndex(currentCardIndex + 1);
-          resetState();
-        }, 3000);
+
+        // Increment earned points by 5
+        setEarnedPoints((prevPoints) => {
+          const newPoints = prevPoints + 5;
+          updatedCount(newPoints); // Call updatedCount with the new points
+          return newPoints;
+        });
+
+        // Check if the earned points reach a threshold to switch categories
       } else {
         toast.error("Please try again");
         resetState();
@@ -155,6 +219,7 @@ const AudioRecorder = () => {
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
     setCurrentCardIndex(0);
+    setEarnedPoints(0);
   };
 
   const resetState = () => {
@@ -237,16 +302,16 @@ const AudioRecorder = () => {
           >
             Upload Audio
           </button>
-          <button
+          {/* <button
             onClick={handlePlay}
             disabled={!uploaded || recording}
             className="bg-purple-500 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto sm:mr-2 disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
           >
             Play Recorded Audio
-          </button>
+          </button> */}
           <button
             onClick={() => setShowConfirmationDialog(true)}
-            disabled={!uploaded || recording}
+            // disabled={!uploaded || recording}
             className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mb-2 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed sm:text-lg"
           >
             Reset
@@ -261,20 +326,29 @@ const AudioRecorder = () => {
           <audio controls src={audioURL} className="mb-4 sm:w-1/2"></audio>
         )}
 
-<div className="container mx-auto px-4">
-        <div className="points_container text-center mb-8">
-          <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4"> {/* Added margin to the right */}
-            <h2 className="text-lg font-semibold mb-2">Total Points</h2>
-            <p className="text-2xl">{totalPoints}</p>
-          </div>
-          <div className="bg-green-500 text-white rounded-md py-4 px-6 inline-block">
-            <h2 className="text-lg font-semibold mb-2">Earned Points</h2>
-            <p className="text-2xl">{earnedPoints}</p>
+        {showConfirmationDialog && (
+          <Confirmation
+            handleConfirmation={handleConfirmation}
+            setShowConfirmationDialog={setShowConfirmationDialog}
+          />
+        )}
+
+        <div className="container mx-auto px-4">
+          <div className="points_container text-center mb-8">
+            <div className="bg-purple-700 text-white rounded-md py-4 px-6 mb-4 inline-block mr-4">
+              {" "}
+              {/* Added margin to the right */}
+              <h2 className="text-lg font-semibold mb-2">Total Points</h2>
+              <p className="text-2xl">{totalPoints}</p>
+            </div>
+            <div className="bg-green-500 text-white rounded-md py-4 px-6 inline-block">
+              <h2 className="text-lg font-semibold mb-2">Earned Points</h2>
+              <p className="text-2xl">{earnedPoints}</p>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-      
+
       <Footer />
     </>
   );

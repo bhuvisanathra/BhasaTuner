@@ -9,7 +9,7 @@ function Navbar() {
 
   const handleSignOut = () => {
     signOut(auth).then((val) => {
-      localStorage.removeItem("authToken");
+      localStorage.removeItem("userId");
       navigate("/login");
     });
   };
