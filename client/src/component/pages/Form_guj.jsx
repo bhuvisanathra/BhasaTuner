@@ -192,6 +192,11 @@ const AudioRecorder = () => {
           updatedCount(newPoints); // Call updatedCount with the new points
           return newPoints;
         });
+
+        setTimeout(() => {
+          setCurrentCardIndex(currentCardIndex + 1);
+          resetState();
+        }, 3000);
       } else {
         toast.error("Please try again");
         resetState();

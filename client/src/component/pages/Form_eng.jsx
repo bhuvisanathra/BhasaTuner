@@ -180,8 +180,10 @@ const AudioRecorder = () => {
       const stringToCheck = JSON.stringify(
         responseData.text.replace(/<s>/g, "")
       )
-        .replace(/\s/g, "")
-        .replace(/^"(.*)"$/, "$1");
+        .replace(/\s{2,}/g, " ")
+        .replace(/^"(.*)"$/, "$1")
+        .trim()
+        .toLowerCase();
 
       setResponse(stringToCheck);
       console.log("Outside ", stringToCheck);
@@ -194,9 +196,10 @@ const AudioRecorder = () => {
       if (
         stringToCheck ==
         categoryData[currentCardIndex].english
-          .replace(/<s>/g, "")
-          .replace(/\s/g, "")
+          .replace(/\s{2,}/g, " ")
           .replace(/^"(.*)"$/, "$1")
+          .trim()
+          .toLowerCase()
       ) {
         console.log("Inside ", stringToCheck);
         console.log(stringToCheck);
@@ -208,6 +211,10 @@ const AudioRecorder = () => {
           updatedCount(newPoints); // Call updatedCount with the new points
           return newPoints;
         });
+        setTimeout(() => {
+          setCurrentCardIndex(currentCardIndex + 1);
+          resetState();
+        }, 3000);
       } else {
         toast.error("Please try again");
         resetState();

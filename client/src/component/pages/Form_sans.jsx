@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BASE_URL } from "../../../url";
-import { Loader } from "../Loader";
 import Confirmation from "../Confirmation";
 import { barakhdi } from "../../data/barakhadi_sans";
 import { words } from "../../data/words_sans";
@@ -200,6 +199,11 @@ const AudioRecorder = () => {
           updatedCount(newPoints); // Call updatedCount with the new points
           return newPoints;
         });
+
+        setTimeout(() => {
+          setCurrentCardIndex(currentCardIndex + 1);
+          resetState();
+        }, 3000);
 
         // Check if the earned points reach a threshold to switch categories
       } else {
