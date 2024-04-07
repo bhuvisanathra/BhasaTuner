@@ -24,7 +24,7 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <a href="/homepage" className="text-white font-bold text-xl">
-              Language Learner
+              भाषा Tuner
             </a>
           </div>
           <div className="hidden md:block">

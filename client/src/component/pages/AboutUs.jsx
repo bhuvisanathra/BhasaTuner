@@ -61,7 +61,7 @@ const jsonData = [
   },
   {
     name: "Dev Joshi",
-    position: "Cloud",
+    position: "Backend Developer",
     imgSrc: dev,
     social: [
       {
