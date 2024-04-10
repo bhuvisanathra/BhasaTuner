@@ -1,21 +1,17 @@
-# BHASHA SIKHO 
+# भाषा Tuner
 ![image](https://github.com/bhuvisanathra/UEM_hackathon/assets/68009290/6036513a-ba8a-4ca4-97c8-e567e0a5a3e4)
 
 
 
-BHASHA SIKHO is a Language Learning App: Create a web application for language learning that utilizes interactive exercises, multimedia content, and gamification techniques to engage users. The app should support multiple languages and cater to different proficiency levels, with features for vocabulary building, pronunciation practice, and cultural immersion
-
-## 📖 Project Overview
-
-The project aims to address various challenges faced by construction teams, such as manual paperwork, communication gaps, and delays in bill approval. By leveraging technology, NIRMAANYATRA provides a centralized platform where contractors and administrators can interact seamlessly, leading to improved productivity and project outcomes. ⚡
+भाषा Tuner is a Language Learning App: Create a web application for language learning that utilizes interactive exercises, multimedia content, and gamification techniques to engage users. The app should support multiple languages and cater to different proficiency levels, with features for vocabulary building, pronunciation practice, and cultural immersion
 
 ## 🔑 Key Features
 
-Bhasha Sikho
+भाषा Tuner
 
 Language Learning Web-App utilizes interactive exercises and gamification techniques to engage users. The app supports multiple languages and caters to users with varying proficiency levels..!
 
-The problem it solves are:
+The problems it solves are:
 ### 1. Accessibility: 
 Traditional language learning methods can be limited by factors such as location, time constraints, and resource availability. By being accessible online, the web application allows users to learn anytime, anywhere, as long as they have an internet connection.
 
