@@ -120,7 +120,7 @@ This will start the Django development server. You can access it at http://local
 
 ## 🌐 Live Demo
 
-Check out the live demo of NIRMAANYATRA at https://bhasasikhouem.netlify.app/. 🚀
+Check out the live demo at https://bhasasikhouem.netlify.app/. 🚀
 
 ## 🤝 Contributing
 
